@@ -1,0 +1,3 @@
+include ':wtplayer'
+include ':app'
+rootProject.name = "wtplayer"

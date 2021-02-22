@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <stroke
+                android:width="0.5dp"
+                android:color="#103865" />
+        </shape>
+    </item>
+    <item android:left="10dp" android:right="10dp" android:top="10dp" android:bottom="10dp">
+        <shape
+            android:shape="oval"
+            android:dither="true">
+            <solid android:color="#FF1B2035" />
+            <stroke
+                android:width="1dp"
+                android:color="#FF0286FF" />
+            <item android:name="android:shadowDx">0</item>
+            <item android:name="android:shadowDy">4</item>
+            <item android:name="android:shadowRadius">20</item>
+            <item android:name="android:shadowColor">#4D000000</item>
+        </shape>
+    </item>
+</layer-list>

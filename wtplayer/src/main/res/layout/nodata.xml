@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            style="@style/tv_tip"
+            android:drawableTop="@mipmap/default_nodata"
+            android:gravity="center"
+            android:text="暂无数据" />
+
+        <TextView
+            android:id="@+id/tv_refresh"
+            android:layout_marginTop="16dp"
+            android:text="@string/refresh"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textColor="#FF19A3FF"
+            android:background="@drawable/bg_tv_tip"
+            android:layout_width="100dp"
+            android:layout_height="45dp" />
+    </LinearLayout>
+
+
+</FrameLayout>
