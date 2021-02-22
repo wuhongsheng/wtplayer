@@ -68,6 +68,6 @@ dependencies {
     implementation "com.blankj:utilcodex:1.23.7"
     //implementation project(':baselibrary')
 
-    implementation 'com.github.wuhongsheng:wtplayer:1.0'
+    //implementation 'com.github.wuhongsheng:wtplayer:1.0'
 
 }
