@@ -26,7 +26,7 @@ dependencies {
 }
 ```
 
-## 使用示例
+## WtPlayer使用
 
 1.布局文件
 ```xml
