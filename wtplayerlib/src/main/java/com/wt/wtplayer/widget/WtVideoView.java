@@ -28,10 +28,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
-import com.blankj.utilcode.util.ImageUtils;
 import com.wt.wtplayer.CommonUtil;
 import com.wt.wtplayer.R;
 import com.wt.wtplayer.services.MediaPlayerService;
+import com.wt.wtplayer.utils.ImageUtils;
 
 import java.io.File;
 import java.io.IOException;

@@ -19,8 +19,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.wt.wtplayer.R;
 import com.wt.wtplayer.widget.IMediaController;
 import com.wt.wtplayer.widget.PlayerSettings;
@@ -335,7 +335,7 @@ public class CustomMediaController extends FrameLayout implements IMediaControll
                 public void onClick(View v) {
                     if(videoControlListener != null){
                         if(isRecording){
-                            ToastUtils.showShort("请先结束录像操作");
+                            Toast.makeText(mContext,"请先结束录像操作",Toast.LENGTH_SHORT).show();
                             return;
                         }
                         if(mVideoQuality.getText().equals(mContext.getString(R.string.sd))){

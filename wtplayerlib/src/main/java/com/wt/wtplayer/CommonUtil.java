@@ -10,7 +10,6 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.widget.EditText;
 
-import com.blankj.utilcode.util.GsonUtils;
 
 import java.io.File;
 import java.util.Arrays;
@@ -87,33 +86,7 @@ public class CommonUtil {
 
 
 
-    /**
-     * list 转 string
-     *
-     * @param list
-     * @return
-     */
-    public static String list2String(List<String> list) {
-        Log.d(TAG, GsonUtils.toJson(list));
-        if (list == null || list.isEmpty()) {
-            return "";
-        } else {
-            boolean isFirst = true;
-            StringBuffer sb = new StringBuffer();
-            for (int i = 0; i < list.size(); i++) {
-                if (TextUtils.isEmpty(list.get(0))) {
-                    continue;
-                }
-                if (isFirst) {
-                    sb.append(list.get(i));
-                    isFirst = false;
-                } else {
-                    sb.append(",").append(list.get(i));
-                }
-            }
-            return TextUtils.isEmpty(sb.toString()) ? "" : sb.toString();
-        }
-    }
+
 
     public static List<String> String2List(String str) {
         String[] strings;
