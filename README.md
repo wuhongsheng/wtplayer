@@ -18,7 +18,6 @@ allprojects {
 ```
 
 ### 添加依赖项
-[![](https://www.jitpack.io/v/wuhongsheng/wtplayer.svg)](https://www.jitpack.io/#wuhongsheng/wtplayer)
 
 ```
 dependencies {
