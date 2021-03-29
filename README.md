@@ -45,11 +45,31 @@ dependencies {
 ```
 
 ```
-  mBinding!!.videoView.setVideoPath(path)
-  mBinding!!.videoView?.start()
+ class MainTestActivity : AppCompatActivity() {
+     private lateinit var mBinding: MainTestActBinding
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+
+         mBinding = DataBindingUtil.setContentView(this,
+                 R.layout.main_test_act)
+
+         lifecycle.addObserver(mBinding.videoView)
+
+         mBinding.videoView.setHudView(mBinding.hudView)
+         mBinding.tvPlay.setOnClickListener(View.OnClickListener {
+             if(TextUtils.isEmpty(mBinding.etPath.text)){
+                 Toast.makeText(this,"请输入路径",Toast.LENGTH_SHORT).show()
+             }else{
+                 var videoPath = mBinding.etPath.text.toString()
+                 mBinding.videoView.setVideoPath(videoPath)
+                 mBinding.videoView.start()
+             }
+         })
+         mBinding.tvPlay.callOnClick()
+     }
+ }
 ```
 
 
 ## TODO
-* 增加Demo页面
 * 增加投屏功能
