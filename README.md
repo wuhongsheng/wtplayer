@@ -3,7 +3,7 @@
 音视频播放器(基于ijkplayer)
 扩展录像、截屏等方法
 
-
+![](https://github.com/wuhongsheng/wtplayer/blob/master/record.gif)
 
 
 ## 导入方式
@@ -18,7 +18,6 @@ allprojects {
 ```
 
 ### 添加依赖项
-[![](https://www.jitpack.io/v/wuhongsheng/wtplayer.svg)](https://www.jitpack.io/#wuhongsheng/wtplayer)
 
 ```
 dependencies {
@@ -52,4 +51,5 @@ dependencies {
 
 
 ## TODO
-
+* 增加Demo页面
+* 增加投屏功能
