@@ -27,6 +27,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 
 import com.wt.wtplayer.CommonUtil;
 import com.wt.wtplayer.R;
@@ -50,7 +53,7 @@ import tv.danmaku.ijk.media.player.misc.ITrackInfo;
 /**
  * 自定义视频播放控件
  */
-public class WtVideoView extends FrameLayout implements MediaController.MediaPlayerControl {
+public class WtVideoView extends FrameLayout implements MediaController.MediaPlayerControl , LifecycleObserver {
     private String TAG = "WtVideoView";
     //settable by the client
     private Uri mUri;
@@ -137,6 +140,21 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
     //缩放事件手势识别器
     private ScaleGestureDetector mScaleGestureDetector;
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    private void initPlayer(){
+        Log.e(TAG,"initPlayer");
+        IjkMediaPlayer.loadLibrariesOnce(null);
+        IjkMediaPlayer.native_profileBegin("libijkplayer.so");
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    public void onStop(){
+        Log.e(TAG,"onStop");
+        stopPlayback();
+        release(true);
+        stopBackgroundPlay();
+        IjkMediaPlayer.native_profileEnd();
+    }
 
 
     private static final int[] s_allAspectRatio = {
@@ -148,6 +166,9 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
             IRenderView.AR_4_3_FIT_PARENT};
     //private int mCurrentAspectRatioIndex = 0;
     private int mCurrentAspectRatio = s_allAspectRatio[3];
+
+
+
 
 
     public interface OnScaleGestureListener{
