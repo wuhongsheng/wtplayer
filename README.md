@@ -44,7 +44,7 @@ dependencies {
         </RelativeLayout>
 ```
 
-```
+```java
  class MainTestActivity : AppCompatActivity() {
      private lateinit var mBinding: MainTestActBinding
      override fun onCreate(savedInstanceState: Bundle?) {
