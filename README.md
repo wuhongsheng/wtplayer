@@ -5,6 +5,11 @@
 
 ![](https://github.com/wuhongsheng/wtplayer/blob/master/record.gif)
 
+## 特性
+
+1. 使用kotlin和AndroidX编写，支持java使用
+2. 简单易用支持生命周期感知无需处理so库加载和释放
+
 
 ## 导入方式
 ### 将JitPack存储库添加到您的构建文件中(项目根目录下build.gradle文件)
@@ -72,4 +77,4 @@ dependencies {
 
 
 ## TODO
-* 增加投屏功能
+* []增加投屏功能
