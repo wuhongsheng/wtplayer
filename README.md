@@ -9,6 +9,7 @@
 
 1. 使用kotlin和AndroidX编写，支持java使用
 2. 简单易用支持生命周期感知无需处理so库加载和释放
+3. RTSP/RTMP 秒开优化
 
 
 ## 导入方式
@@ -77,5 +78,6 @@ dependencies {
 
 
 ### TODO
+- [ ] 升级ffmpeg4.0
 - [ ] 增加投屏功能
 
