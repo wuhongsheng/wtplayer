@@ -1,7 +1,7 @@
 [![](https://www.jitpack.io/v/wuhongsheng/wtplayer.svg)](https://www.jitpack.io/#wuhongsheng/wtplayer)
 # wtplayer
-音视频播放器(基于ijkplayer)
-扩展录像、截屏等方法
+音视频播放器(基于[ijkplayer](https://github.com/bilibili/ijkplayer))
+扩展录像、截屏等功能
 
 ![](https://github.com/wuhongsheng/wtplayer/blob/master/record.gif)
 

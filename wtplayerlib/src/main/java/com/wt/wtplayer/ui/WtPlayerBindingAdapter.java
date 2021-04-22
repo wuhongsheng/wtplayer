@@ -16,7 +16,6 @@ import com.wt.wtplayer.R;
  * @date 2020/9/22
  */
 public class WtPlayerBindingAdapter {
-
     @BindingAdapter("isVideoRecording")
     public static void bindIsVideoRecording(TextView textView,Boolean isRecord){
         Drawable drawable = null;

@@ -55,7 +55,6 @@ import tv.danmaku.ijk.media.player.misc.ITrackInfo;
  */
 public class WtVideoView extends FrameLayout implements MediaController.MediaPlayerControl , LifecycleObserver {
     private String TAG = "WtVideoView";
-    //settable by the client
     private Uri mUri;
     private Map<String, String> mHeaders;
 
@@ -488,7 +487,9 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
         public void onPrepared(IMediaPlayer mp) {
 
             mPrepareEndTime = System.currentTimeMillis();
-            mHudViewHolder.updateLoadCost(mPrepareEndTime - mPrepareStartTime);
+            if(mHudViewHolder != null){
+                mHudViewHolder.updateLoadCost(mPrepareEndTime - mPrepareStartTime);
+            }
             mCurrentState = STATE_PREPARED;
 
             // Get the capabilities of the player for this stream
@@ -689,7 +690,9 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
         @Override
         public void onSeekComplete(IMediaPlayer mp) {
             mSeekEndTime = System.currentTimeMillis();
-            mHudViewHolder.updateSeekCost(mSeekEndTime - mSeekStartTime);
+            if(mHudViewHolder != null){
+                mHudViewHolder.updateSeekCost(mSeekEndTime - mSeekStartTime);
+            }
         }
     };
 

@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.wt.wtplayer.databinding.MainTestActBinding
+import com.wt.wtplayer.ui.CustomMediaController
 import com.wt.wtplayer.widget.WtVideoView
 
 /**
@@ -15,15 +16,17 @@ import com.wt.wtplayer.widget.WtVideoView
  */
 class MainTestActivity : AppCompatActivity() {
     private lateinit var mBinding: MainTestActBinding
+    private var mMediaController: CustomMediaController? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         mBinding = DataBindingUtil.setContentView(this,
                 R.layout.main_test_act)
 
         lifecycle.addObserver(mBinding.videoView)
 
-        mBinding.videoView.setHudView(mBinding.hudView)
+        initMediaController()
+
         mBinding.tvPlay.setOnClickListener(View.OnClickListener {
             if(TextUtils.isEmpty(mBinding.etPath.text)){
                 Toast.makeText(this,"请输入路径",Toast.LENGTH_SHORT).show()
@@ -35,4 +38,12 @@ class MainTestActivity : AppCompatActivity() {
         })
         mBinding.tvPlay.callOnClick()
     }
+
+
+    private fun initMediaController(){
+        mMediaController = CustomMediaController(this, false)
+        //mMediaController?.videoControlListener = this
+        mBinding.videoView.setMediaController(mMediaController)
+    }
+
 }

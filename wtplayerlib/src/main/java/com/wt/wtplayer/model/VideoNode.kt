@@ -1,12 +1,14 @@
 package com.wt.wtplayer.model
 
+import java.io.Serializable
+
 /**
  * 视频树节点
  *
  * @author whs
  * @date 2020/9/18
  */
-class VideoNode {
+class VideoNode : Serializable {
     /**
      * id : 8a0cc9f8ee76485f9eea0fd028c329a1
      * code : 43100111012160000005
