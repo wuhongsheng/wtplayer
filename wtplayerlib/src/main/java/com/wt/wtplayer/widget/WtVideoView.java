@@ -149,9 +149,9 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     public void onStop(){
         Log.e(TAG,"onStop");
-        stopPlayback();
+      /*  stopPlayback();
         release(true);
-        stopBackgroundPlay();
+        stopBackgroundPlay();*/
         IjkMediaPlayer.native_profileEnd();
     }
 
