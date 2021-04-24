@@ -78,6 +78,6 @@ dependencies {
 
 
 ### TODO
-- [ ] 升级ffmpeg4.0
+- [x] 升级ffmpeg4.0
 - [ ] 增加投屏功能
 
