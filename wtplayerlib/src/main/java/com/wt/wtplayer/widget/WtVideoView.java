@@ -167,9 +167,6 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
     private int mCurrentAspectRatio = s_allAspectRatio[3];
 
 
-
-
-
     public interface OnScaleGestureListener{
         void onZoomIn();
         void onZoomOut();

@@ -79,6 +79,6 @@ dependencies {
 
 ### TODO
 - [x] 升级ffmpeg4.0
-- [ ] 支持https
+- [x] 支持https
 - [ ] 增加投屏功能
 
