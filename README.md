@@ -2,6 +2,7 @@
 # wtplayer
 音视频播放器(基于[ijkplayer](https://github.com/bilibili/ijkplayer))
 扩展录像、截屏等功能
+[so文件编译依赖这个仓库](https://github.com/wuhongsheng/ijkplayer)
 
 ![](https://github.com/wuhongsheng/wtplayer/blob/master/record.gif)
 
