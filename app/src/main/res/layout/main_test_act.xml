@@ -3,11 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.wt.wtplayer.MainViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <RelativeLayout
             android:id="@+id/video_parent"
             android:background="#00000000"
@@ -22,7 +26,55 @@
                 android:layout_gravity="center" />
         </RelativeLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            isGone="@{viewModel.screenLandscape}"
+            android:id="@+id/cl_control"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:background="#FF131421"
+            app:layout_constraintTop_toBottomOf="@+id/video_parent">
+            <TextView
+                android:id="@+id/tv_screenshot"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/screenshot"
+                android:textColor="@color/gray"
+                app:drawableTopCompat="@mipmap/icon_jt"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv_record"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tv_record"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@{viewModel.recordTip,default=录像}"
+                android:textColor="@color/gray"
+                isVideoRecording="@{viewModel.isRecording}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                android:minEms="3"
+                app:layout_constraintStart_toEndOf="@+id/tv_screenshot"
+                app:layout_constraintTop_toTopOf="parent"
+                app:drawableTopCompat="@mipmap/icon_lz_nor" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         <TableLayout
+            isGone="@{viewModel.screenLandscape}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/video_parent"
             app:layout_constraintBottom_toBottomOf="@id/video_parent"
@@ -32,13 +84,12 @@
             android:layout_gravity="right|center_vertical"
             android:background="@color/transparent_dark"
             android:padding="8dp" />
-
         <LinearLayout
+            isGone="@{viewModel.screenLandscape}"
             android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <EditText
                 android:id="@+id/et_path"
                 android:layout_weight="1"

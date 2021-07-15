@@ -2,6 +2,7 @@ package com.wt.wtplayer.ui;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -16,6 +17,25 @@ import com.wt.wtplayer.R;
  * @date 2020/9/22
  */
 public class WtPlayerBindingAdapter {
+
+    @BindingAdapter("isGone")
+    public static void setIsGone(View view, Boolean isGone) {
+        if (isGone != null && isGone) {
+            view.setVisibility(View.GONE);
+        } else {
+            view.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @BindingAdapter("isVisiable")
+    public static void setIsVisiable(View view, Boolean visiable) {
+        if (visiable == null || visiable) {
+            view.setVisibility(View.VISIBLE);
+        } else {
+            view.setVisibility(View.GONE);
+        }
+    }
+
     @BindingAdapter("isVideoRecording")
     public static void bindIsVideoRecording(TextView textView,Boolean isRecord){
         Drawable drawable = null;

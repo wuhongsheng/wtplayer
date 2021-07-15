@@ -48,5 +48,7 @@ dependencies {
     implementation project(':wtplayerlib')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.31"
+    //第三方库
+    implementation "com.blankj:utilcodex:1.23.7"
 
 }

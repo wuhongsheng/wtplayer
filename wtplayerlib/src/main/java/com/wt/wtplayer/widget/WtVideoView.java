@@ -1482,7 +1482,6 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
          // boolean flag = ijkMediaPlayer.getCurrentFrame(srcBitmap);
         if (srcBitmap != null) {
             // 保存图片
-            //String path = getInnerSDCardPath() + "/ijkplayer/snapshot";
             String path = mAppContext.getExternalFilesDir("snapshot'").getAbsolutePath() + "/";
             File screenshotsDirectory = new File(path);
             if (!screenshotsDirectory.exists()) {
@@ -1493,21 +1492,12 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
                             + "/"
                             + new SimpleDateFormat("yyyyMMddHHmmss")
                             .format(new Date()) + ".jpg");
-            //ImageUtils.saveBitmap(savePath.getPath(), srcBitmap);
             boolean isSave = ImageUtils.save(srcBitmap, savePath.getPath(), Bitmap.CompressFormat.JPEG);
             if (isSave) {
                 //广播到相册
                 ContentValues localContentValues = CommonUtil.getImageContentValues(mAppContext, savePath, System.currentTimeMillis());
-               /* ContentValues values = new ContentValues();
-                values.put(MediaStore.Images.Media.DATA, savePath.getAbsolutePath());
-                values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");*/
-                //values.put(MediaStore.Images.Media.RELATIVE_PATH, "DCIM/");
-
                 Uri uri = mAppContext.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, localContentValues);
-                //mAppContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(savePath)));
-                //mAppContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
                 Log.e(TAG, "save snapshotPicture uri:" + uri);
-                //mAppContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,Uri.fromFile(savePath)));
                 Toast.makeText(mAppContext, "截图成功并已保存到相册", Toast.LENGTH_SHORT).show();
             }
             Log.e(TAG, "save snapshotPicture:" + isSave);

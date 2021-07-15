@@ -12,8 +12,11 @@
         android:theme="@style/Theme.Wtplayer"
         tools:replace="android:theme">
         <activity
-            android:name=".MainTestActivity"
+            android:hardwareAccelerated="true"
+            android:name=".MainActivity"
             android:label="@string/app_name"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="sensor"
             android:theme="@style/Theme.Wtplayer.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
