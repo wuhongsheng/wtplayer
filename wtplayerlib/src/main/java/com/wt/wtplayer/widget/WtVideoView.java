@@ -1254,11 +1254,10 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
             ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "infbuf", 1);//是否限制输入缓存数
             ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "fflags", "nobuffer");*/
             //RTSP优化 END
-            //tcp传输数据 会增加延时
-            //ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "rtsp_transport", "tcp");
-
+            //tcp传输数据 会增加延时 默认udp
+            ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "rtsp_transport", "tcp");
             //清空DNS,有时因为在APP里面要播放多种类型的视频(如:MP4,直播,直播平台保存的视频,和其他http视频), 有时会造成因为DNS的问题而报10000问题的
-            //ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "dns_cache_clear", 1);
+            ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "dns_cache_clear", 1);
         }
         mediaPlayer = ijkMediaPlayer;
 
@@ -1442,7 +1441,7 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
     public int startRecord() {
         if (mMediaPlayer != null && mRenderView != null && ijkMediaPlayer != null) {
             //Log.e(TAG,"startRecord");
-            videoRecordPath = mAppContext.getExternalFilesDir("record'").getAbsolutePath() + "/"
+            videoRecordPath = mAppContext.getFilesDir().getAbsolutePath() + "/"
                     + new SimpleDateFormat("yyyyMMddHHmmss")
                     .format(new Date()) + ".mov";
             int result = ijkMediaPlayer.startRecord(videoRecordPath);
@@ -1476,29 +1475,25 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
      * 截图
      */
     public boolean snapshotPicture() {
+        //支持软硬解
         Bitmap srcBitmap =  this.mRenderView instanceof TextureRenderView ? ((TextureRenderView)this.mRenderView).getBitmap() : null;
-       /* Bitmap srcBitmap = Bitmap.createBitmap(mVideoWidth,
+        //仅支持软解
+        /* Bitmap srcBitmap = Bitmap.createBitmap(mVideoWidth,
                 mVideoHeight, Bitmap.Config.ARGB_8888);*/
          // boolean flag = ijkMediaPlayer.getCurrentFrame(srcBitmap);
         if (srcBitmap != null) {
             // 保存图片
-            String path = mAppContext.getExternalFilesDir("snapshot'").getAbsolutePath() + "/";
-            File screenshotsDirectory = new File(path);
-            if (!screenshotsDirectory.exists()) {
-                screenshotsDirectory.mkdirs();
-            }
-            File savePath = new File(
-                    screenshotsDirectory.getPath()
-                            + "/"
-                            + new SimpleDateFormat("yyyyMMddHHmmss")
-                            .format(new Date()) + ".jpg");
-            boolean isSave = ImageUtils.save(srcBitmap, savePath.getPath(), Bitmap.CompressFormat.JPEG);
+            File saveFile = new File(mAppContext.getFilesDir(),
+                    new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg");
+            boolean isSave = ImageUtils.save(srcBitmap, saveFile.getPath(), Bitmap.CompressFormat.JPEG);
             if (isSave) {
                 //广播到相册
-                ContentValues localContentValues = CommonUtil.getImageContentValues(mAppContext, savePath, System.currentTimeMillis());
+                ContentValues localContentValues = CommonUtil.getImageContentValues(mAppContext, saveFile, System.currentTimeMillis());
                 Uri uri = mAppContext.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, localContentValues);
                 Log.e(TAG, "save snapshotPicture uri:" + uri);
                 Toast.makeText(mAppContext, "截图成功并已保存到相册", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mAppContext, "截图保存失败", Toast.LENGTH_SHORT).show();
             }
             Log.e(TAG, "save snapshotPicture:" + isSave);
         }
