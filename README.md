@@ -11,6 +11,7 @@
 1. 使用kotlin和AndroidX编写，支持java使用
 2. 简单易用支持生命周期感知无需处理so库加载和释放
 3. RTSP/RTMP 秒开优化
+4. 支持https openssl 升级至1_1_1k
 
 
 ## 导入方式
