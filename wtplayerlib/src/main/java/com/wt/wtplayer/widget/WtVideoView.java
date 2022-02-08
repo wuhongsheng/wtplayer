@@ -149,9 +149,6 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     public void onStop(){
         Log.e(TAG,"onStop");
-      /*  stopPlayback();
-        release(true);
-        stopBackgroundPlay();*/
         IjkMediaPlayer.native_profileEnd();
     }
 
@@ -273,17 +270,17 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
      * 设置渲染控件
      */
     public void setRender() {
-        TextureRenderView renderView = new TextureRenderView(getContext());
+       /* TextureRenderView renderView = new TextureRenderView(getContext());
         if (mMediaPlayer != null) {
             renderView.getSurfaceHolder().bindToMediaPlayer(mMediaPlayer);
             renderView.setVideoSize(mMediaPlayer.getVideoWidth(), mMediaPlayer.getVideoHeight());
             renderView.setVideoSampleAspectRatio(mMediaPlayer.getVideoSarNum(), mMediaPlayer.getVideoSarDen());
             renderView.setAspectRatio(mCurrentAspectRatio);
         }
-        setRenderView(renderView);
-        /*SurfaceRenderView renderView = new SurfaceRenderView(getContext());
         setRenderView(renderView);*/
-        /*switch (render) {
+     /*   GLSurfaceRenderView renderView = new GLSurfaceRenderView(getContext());
+        setRenderView(renderView);*/
+        switch (mCurrentRender) {
             case RENDER_NONE:
                 setRenderView(null);
                 break;
@@ -302,11 +299,14 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
                 SurfaceRenderView renderView = new SurfaceRenderView(getContext());
                 setRenderView(renderView);
                 break;
+            }case RENDER_GL_SURFACE_VIEW:{
+                GLSurfaceRenderView renderView = new GLSurfaceRenderView(getContext());
+                setRenderView(renderView);
             }
             default:
-                Log.e(TAG, String.format(Locale.getDefault(), "invalid render %d\n", render));
+                Log.e(TAG, String.format(Locale.getDefault(), "invalid render %d\n", mCurrentRender));
                 break;
-        }*/
+        }
     }
 
     public void setHudView(TableLayout tableLayout) {
@@ -320,6 +320,10 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
      */
     public void setVideoPath(String path) {
         setVideoURI(Uri.parse(path));
+    }
+
+    public void setRenderType(int renderType){
+        mCurrentRender = renderType;
     }
 
     /**
@@ -1049,6 +1053,8 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
     public static final int RENDER_NONE = 0;
     public static final int RENDER_SURFACE_VIEW = 1;
     public static final int RENDER_TEXTURE_VIEW = 2;
+    public static final int RENDER_GL_SURFACE_VIEW = 3;
+
 
     private List<Integer> mAllRenders = new ArrayList<Integer>();
     private int mCurrentRenderIndex = 0;
@@ -1061,18 +1067,17 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
         if (mAllRenders.isEmpty())
             mAllRenders.add(RENDER_SURFACE_VIEW);
         mCurrentRender = mAllRenders.get(mCurrentRenderIndex);
-        //setRender(mCurrentRender);
         setRender();
     }
 
- /*   public int toggleRender() {
+    public int toggleRender() {
         mCurrentRenderIndex++;
         mCurrentRenderIndex %= mAllRenders.size();
 
         mCurrentRender = mAllRenders.get(mCurrentRenderIndex);
-        setRender(mCurrentRender);
+        setRender();
         return mCurrentRender;
-    }*/
+    }
 
   /*  @NonNull
     public static String getRenderText(Context context, int render) {

@@ -9,17 +9,19 @@ import android.text.TextUtils
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import com.blankj.utilcode.util.ScreenUtils
 import com.wt.wtplayer.databinding.MainTestActBinding
 import com.wt.wtplayer.ui.CustomMediaController
+import com.wt.wtplayer.widget.WtVideoView
 
 /**
  * 主页面
  */
-class MainActivity : AppCompatActivity(), CustomMediaController.VideoControlListener {
+class MainActivity : ComponentActivity(), CustomMediaController.VideoControlListener {
     private lateinit var mBinding: MainTestActBinding
     private var mMediaController: CustomMediaController? = null
     private var mViewModel:MainViewModel? = null
@@ -54,7 +56,6 @@ class MainActivity : AppCompatActivity(), CustomMediaController.VideoControlList
                 Toast.makeText(this,"当前视频流格式可能不支持录像操作",Toast.LENGTH_SHORT).show()
             }
         })
-
         mBinding.tvScreenshot.setOnClickListener(View.OnClickListener {
             mBinding.videoView.snapshotPicture()
         })
@@ -68,13 +69,16 @@ class MainActivity : AppCompatActivity(), CustomMediaController.VideoControlList
             }else{
                 var videoPath = mBinding.etPath.text.toString()
                 mBinding.videoView.setVideoPath(videoPath)
+                mBinding.videoView.setRenderType(WtVideoView.RENDER_SURFACE_VIEW)
                 mBinding.videoView.start()
             }
         })
         mBinding.tvPlay.callOnClick()
     }
 
-
+    /**
+     * initMediaController
+     */
     private fun initMediaController(){
         mMediaController = CustomMediaController(this, false)
         mMediaController?.videoControlListener = this
@@ -90,6 +94,9 @@ class MainActivity : AppCompatActivity(), CustomMediaController.VideoControlList
         //切换视频质量
     }
 
+    /**
+     * 横竖屏切换
+     */
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         var  mCurrentOrientation = newConfig.orientation;
@@ -112,5 +119,7 @@ class MainActivity : AppCompatActivity(), CustomMediaController.VideoControlList
         mMediaController?.videoControlListener = this
         mBinding.videoView.setMediaController(mMediaController)
     }
+
+
 
 }

@@ -1,8 +1,9 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'com.github.dcendents.android-maven'
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    /*id 'kotlin-android-extensions'
+    id 'kotlin-kapt'*/
+}
 group='com.github.wuhongsheng'
 
 android {
@@ -12,7 +13,6 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 29
-        versionName "1.1.0"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         flavorDimensions 'version'
@@ -52,7 +52,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-
+    implementation 'com.github.jitpack:gradle-simple:1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.31"
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
