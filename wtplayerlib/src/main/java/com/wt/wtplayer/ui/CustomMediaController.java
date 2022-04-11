@@ -36,7 +36,7 @@ import java.util.Locale;
  * @author whs
  * @date 2020/9/25
  */
-public class CustomMediaController extends FrameLayout implements IMediaController {
+public class CustomMediaController extends FrameLayout implements IMediaController  {
     private static final String TAG = "CustomMediaController";
     private MediaController.MediaPlayerControl mPlayer;
     private final Context mContext;
@@ -79,6 +79,9 @@ public class CustomMediaController extends FrameLayout implements IMediaControll
 
 
     private PlayerSettings mPlayerSettings;
+
+
+
 
 
     public interface VideoControlListener{

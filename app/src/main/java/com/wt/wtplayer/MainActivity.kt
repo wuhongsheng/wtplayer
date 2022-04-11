@@ -68,8 +68,8 @@ class MainActivity : ComponentActivity(), CustomMediaController.VideoControlList
                 Toast.makeText(this,"请输入路径",Toast.LENGTH_SHORT).show()
             }else{
                 var videoPath = mBinding.etPath.text.toString()
-                mBinding.videoView.setVideoPath(videoPath)
                 mBinding.videoView.setRenderType(WtVideoView.RENDER_SURFACE_VIEW)
+                mBinding.videoView.setVideoPath(videoPath)
                 mBinding.videoView.start()
             }
         })

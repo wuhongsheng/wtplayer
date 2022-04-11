@@ -46,7 +46,7 @@ public interface IRenderView {
     void setVideoSampleAspectRatio(int videoSarNum, int videoSarDen);
 
     void setVideoRotation(int degree);
-
+    //纵横比
     void setAspectRatio(int aspectRatio);
 
     void addRenderCallback(@NonNull IRenderCallback callback);

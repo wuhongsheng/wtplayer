@@ -76,6 +76,7 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
     private int mCurrentState = STATE_IDLE;
     private int mTargetState = STATE_IDLE;
 
+    
     // All the stuff we need for playing and showing a video
     private IRenderView.ISurfaceHolder mSurfaceHolder = null;
     private IMediaPlayer mMediaPlayer = null;
@@ -202,9 +203,10 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
         mAppContext = context.getApplicationContext();
         mPlayerSettings = new PlayerSettings(mAppContext);
 
+
         initBackground();
         initRenders();
-        setRender();
+        //setRender();
 
 
         mVideoWidth = 0;
@@ -270,16 +272,7 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
      * 设置渲染控件
      */
     public void setRender() {
-       /* TextureRenderView renderView = new TextureRenderView(getContext());
-        if (mMediaPlayer != null) {
-            renderView.getSurfaceHolder().bindToMediaPlayer(mMediaPlayer);
-            renderView.setVideoSize(mMediaPlayer.getVideoWidth(), mMediaPlayer.getVideoHeight());
-            renderView.setVideoSampleAspectRatio(mMediaPlayer.getVideoSarNum(), mMediaPlayer.getVideoSarDen());
-            renderView.setAspectRatio(mCurrentAspectRatio);
-        }
-        setRenderView(renderView);*/
-     /*   GLSurfaceRenderView renderView = new GLSurfaceRenderView(getContext());
-        setRenderView(renderView);*/
+        Log.i(TAG, "setRender: "+mCurrentRender);
         switch (mCurrentRender) {
             case RENDER_NONE:
                 setRenderView(null);
@@ -1062,12 +1055,12 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
     private int mCurrentRender = RENDER_NONE;
 
     private void initRenders() {
+        Log.i(TAG, "initRenders: ");
         mAllRenders.clear();
-
         if (mAllRenders.isEmpty())
             mAllRenders.add(RENDER_SURFACE_VIEW);
         mCurrentRender = mAllRenders.get(mCurrentRenderIndex);
-        setRender();
+        //setRender();
     }
 
     public int toggleRender() {

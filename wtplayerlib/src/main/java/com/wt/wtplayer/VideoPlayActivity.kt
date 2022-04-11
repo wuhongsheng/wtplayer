@@ -117,9 +117,9 @@ class VideoPlayActivity : AppCompatActivity() {
 
         // prefer mVideoPath
         if (mVideoPath != null) {
-            mVideoView!!.setVideoPath(mVideoPath)
+            mVideoView?.setVideoPath(mVideoPath)
         } else if (mVideoUri != null) {
-            mVideoView!!.setVideoURI(mVideoUri)
+            mVideoView?.setVideoURI(mVideoUri)
         } else {
             Log.e(TAG, "Null Data Source\n")
             finish()
@@ -129,6 +129,7 @@ class VideoPlayActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+
 
     }
 
