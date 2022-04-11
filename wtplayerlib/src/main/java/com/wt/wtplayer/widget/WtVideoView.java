@@ -20,7 +20,6 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.MediaController;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +33,7 @@ import androidx.lifecycle.OnLifecycleEvent;
 import com.wt.wtplayer.CommonUtil;
 import com.wt.wtplayer.R;
 import com.wt.wtplayer.services.MediaPlayerService;
+import com.wt.wtplayer.ui.CustomMediaPlayerControl;
 import com.wt.wtplayer.utils.ImageUtils;
 
 import java.io.File;
@@ -53,7 +53,7 @@ import tv.danmaku.ijk.media.player.misc.ITrackInfo;
 /**
  * 自定义视频播放控件
  */
-public class WtVideoView extends FrameLayout implements MediaController.MediaPlayerControl , LifecycleObserver {
+public class WtVideoView extends FrameLayout implements CustomMediaPlayerControl, LifecycleObserver {
     private String TAG = "WtVideoView";
     private Uri mUri;
     private Map<String, String> mHeaders;
@@ -1441,8 +1441,33 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
             //Log.e(TAG,"startRecord");
             videoRecordPath = mAppContext.getFilesDir().getAbsolutePath() + "/"
                     + new SimpleDateFormat("yyyyMMddHHmmss")
-                    .format(new Date()) + ".mov";
+                    .format(new Date()) + ".mp4";
+            Log.i(TAG, "startRecord: "+videoRecordPath);
             int result = ijkMediaPlayer.startRecord(videoRecordPath);
+            Log.e(TAG, "startRecord result:" + result);
+            return result;
+        }
+        return -1;
+    }
+
+    @Override
+    public Bitmap screenShot() {
+        Bitmap srcBitmap = Bitmap.createBitmap(mVideoWidth,
+                mVideoHeight, Bitmap.Config.ARGB_8888);
+         boolean flag = ijkMediaPlayer.getCurrentFrame(srcBitmap);
+        return flag ? srcBitmap:null;
+    }
+
+    @Override
+    public void setVolume(float volume) {
+        ijkMediaPlayer.setVolume(volume,volume);
+    }
+
+    @Override
+    public int startRecord(String path) {
+        if (mMediaPlayer != null && mRenderView != null && ijkMediaPlayer != null) {
+            Log.i(TAG, "startRecord: "+path);
+            int result = ijkMediaPlayer.startRecord(path);
             Log.e(TAG, "startRecord result:" + result);
             return result;
         }
@@ -1452,18 +1477,19 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
     /**
      * 结束录像
      */
+    @Override
     public int stopRecord() {
         Log.e(TAG, "stopRecord");
         if (mMediaPlayer != null && mRenderView != null && ijkMediaPlayer != null) {
             int result = ijkMediaPlayer.stopRecord();
             Log.e(TAG, "stopRecord result:" + result);
-            if (result == 0) {
+            /*if (result == 0) {
                 //广播到相册
                 ContentValues localContentValues = CommonUtil.getVideoContentValues(mAppContext, new File(videoRecordPath), System.currentTimeMillis());
                 Uri localUri = mAppContext.getContentResolver().insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, localContentValues);
                 Log.e(TAG, "save record uri:" + localUri);
                 Toast.makeText(mAppContext, "录制成功并已保存到相册", Toast.LENGTH_SHORT).show();
-            }
+            }*/
             return result;
         }
         return -1;
@@ -1476,7 +1502,7 @@ public class WtVideoView extends FrameLayout implements MediaController.MediaPla
         //支持软硬解
         Bitmap srcBitmap =  this.mRenderView instanceof TextureRenderView ? ((TextureRenderView)this.mRenderView).getBitmap() : null;
         //仅支持软解
-        /* Bitmap srcBitmap = Bitmap.createBitmap(mVideoWidth,
+         /*Bitmap srcBitmap = Bitmap.createBitmap(mVideoWidth,
                 mVideoHeight, Bitmap.Config.ARGB_8888);*/
          // boolean flag = ijkMediaPlayer.getCurrentFrame(srcBitmap);
         if (srcBitmap != null) {
