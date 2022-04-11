@@ -28,8 +28,7 @@ class MainActivity : ComponentActivity(), CustomMediaController.VideoControlList
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this,
-                R.layout.main_test_act)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.main_test_act)
         mViewModel = MainViewModel()
         mBinding.viewModel = mViewModel
         lifecycle.addObserver(mBinding.videoView)
