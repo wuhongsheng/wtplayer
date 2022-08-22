@@ -17,7 +17,15 @@
 <!--
     <string name="video_path">rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov</string>
 -->
-    <string name="video_path">http://192.168.3.17/live/device_xuht.live.mp4</string>
+<!--
+    <string name="video_path">rtsp://192.168.3.15/live/test_whs</string>
+-->
+    <string name="video_path">rtsp://192.168.3.79/live/test</string>
+
+
+<!--
+    <string name="video_path">rtsp://192.168.3.206:8554/live</string>
+-->
 
 
 

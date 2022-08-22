@@ -1439,6 +1439,9 @@ public class WtVideoView extends FrameLayout implements CustomMediaPlayerControl
     public int startRecord() {
         if (mMediaPlayer != null && mRenderView != null && ijkMediaPlayer != null) {
             //Log.e(TAG,"startRecord");
+            ijkMediaPlayer.setFilterInfo("drawtext=fontfile=/system/fonts/NotoSerifCJK-Regular.ttc:x =w-tw:fontcolor=red:fontsize=28:text=%s:x=20:y=20");
+            //"drawtext=fontfile=/system/fonts/NotoSerifCJK-Regular.ttc:x =w-tw:fontcolor=white:fontsize=20:text=%s:x=5:y=5
+            ijkMediaPlayer.setDrawText("");
             videoRecordPath = mAppContext.getFilesDir().getAbsolutePath() + "/"
                     + new SimpleDateFormat("yyyyMMddHHmmss")
                     .format(new Date()) + ".mp4";
@@ -1480,16 +1483,20 @@ public class WtVideoView extends FrameLayout implements CustomMediaPlayerControl
     @Override
     public int stopRecord() {
         Log.e(TAG, "stopRecord");
+
         if (mMediaPlayer != null && mRenderView != null && ijkMediaPlayer != null) {
             int result = ijkMediaPlayer.stopRecord();
             Log.e(TAG, "stopRecord result:" + result);
-            /*if (result == 0) {
+          /*  if(result == 0){
+                ijkMediaPlayer.setDrawText("whs");
+            }*/
+            if (result == 0) {
                 //广播到相册
                 ContentValues localContentValues = CommonUtil.getVideoContentValues(mAppContext, new File(videoRecordPath), System.currentTimeMillis());
                 Uri localUri = mAppContext.getContentResolver().insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, localContentValues);
                 Log.e(TAG, "save record uri:" + localUri);
                 Toast.makeText(mAppContext, "录制成功并已保存到相册", Toast.LENGTH_SHORT).show();
-            }*/
+            }
             return result;
         }
         return -1;
