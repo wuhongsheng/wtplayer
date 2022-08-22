@@ -82,5 +82,6 @@ dependencies {
 ### TODO
 - [x] 升级ffmpeg4.0
 - [x] 支持https
+- [x] 录像支持自定义水印
 - [ ] 增加投屏功能
 
