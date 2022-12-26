@@ -8,7 +8,6 @@ group='com.github.wuhongsheng'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.3"
 
     defaultConfig {
         minSdkVersion 21
@@ -38,6 +37,11 @@ android {
 
     dataBinding{
         enabled true
+    }
+    buildFeatures {
+        // Enables Jetpack Compose for this module
+        //compose true
+        dataBinding true
     }
 
 

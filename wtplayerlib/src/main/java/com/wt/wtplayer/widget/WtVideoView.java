@@ -192,6 +192,11 @@ public class WtVideoView extends FrameLayout implements CustomMediaPlayerControl
         initVideoView(context);
     }
 
+    @Override
+    public boolean isInEditMode() {
+        return true;
+    }
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public WtVideoView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
@@ -449,9 +454,10 @@ public class WtVideoView extends FrameLayout implements CustomMediaPlayerControl
     public void attachMediaController() {
         if (mMediaPlayer != null && mMediaController != null) {
             mMediaController.setMediaPlayer(this);
-            View anchorView = this.getParent() instanceof View ?
-                    (View) this.getParent() : this;
-            mMediaController.setAnchorView(anchorView);
+            /*View anchorView = this.getParent() instanceof View ?
+                    (View) this.getParent() : this;*/
+
+            mMediaController.setAnchorView(this);
             mMediaController.setEnabled(isInPlaybackState());
         }
     }

@@ -45,14 +45,14 @@
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="@string/screenshot"
-                android:textColor="@color/gray"
-                app:drawableTopCompat="@mipmap/icon_jt"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tv_record"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/gray"
+                app:drawableTopCompat="@drawable/ic_screenshot"/>
             <TextView
                 android:id="@+id/tv_record"
                 android:layout_width="0dp"
@@ -61,14 +61,13 @@
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="@{viewModel.recordTip,default=录像}"
-                android:textColor="@color/gray"
                 isVideoRecording="@{viewModel.isRecording}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                android:minEms="3"
                 app:layout_constraintStart_toEndOf="@+id/tv_screenshot"
                 app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/gray"
                 app:drawableTopCompat="@mipmap/icon_lz_nor" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -98,6 +97,7 @@
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:text="@string/video_path"
+                android:minHeight="48dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView

@@ -1,9 +1,7 @@
 package com.wt.wtplayer
 
-import android.app.Activity
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -28,6 +26,8 @@ class MainActivity : ComponentActivity(), CustomMediaController.VideoControlList
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        /*mBinding = MainTestActBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)*/
         mBinding = DataBindingUtil.setContentView(this, R.layout.main_test_act)
         mViewModel = MainViewModel()
         mBinding.viewModel = mViewModel
@@ -56,6 +56,10 @@ class MainActivity : ComponentActivity(), CustomMediaController.VideoControlList
             }
         })
         mBinding.tvScreenshot.setOnClickListener(View.OnClickListener {
+            if(!mBinding.videoView.isPlaying){
+                Toast.makeText(this,"请先开启播放",Toast.LENGTH_SHORT).show()
+                return@OnClickListener
+            }
             mBinding.videoView.snapshotPicture()
         })
     }
